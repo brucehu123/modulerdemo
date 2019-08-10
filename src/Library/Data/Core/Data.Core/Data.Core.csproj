@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>YunHu.Lib.Data.Core</AssemblyName>
+    <RootNamespace>YunHu.Lib.Data.Core</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Data.Abstractions\Data.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

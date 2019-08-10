@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>YunHu.Lib.Data.Query</RootNamespace>
+    <AssemblyName>YunHu.Lib.Data.Query</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Data.Abstractions\Data.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

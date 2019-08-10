@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>YunHu.Lib.Cache.Redis</RootNamespace>
+    <AssemblyName>YunHu.Lib.Cache.Redis</AssemblyName>
+    <LangVersion>7.1</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Utils\Utils.Core\Utils.Core.csproj" />
+    <ProjectReference Include="..\Cache.Abstractions\Cache.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

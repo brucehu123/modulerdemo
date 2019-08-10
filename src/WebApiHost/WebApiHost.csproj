@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <AssemblyName>YunHu.WebApiHost</AssemblyName>
+    <RootNamespace>YunHu.WebApiHost</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Library\Cache\Cache.MemoryCache\Cache.MemoryCache.csproj" />
+    <ProjectReference Include="..\Library\Cache\Cache.Redis\Cache.Redis.csproj" />
+    <ProjectReference Include="..\Library\Data\Db\Data.MySql\Data.MySql.csproj" />
+    <ProjectReference Include="..\Library\Data\Db\Data.SqlServer\Data.SqlServer.csproj" />
+    <ProjectReference Include="..\Library\Data\Extend\Data.AspNetCore\Data.AspNetCore.csproj" />
+    <ProjectReference Include="..\Library\WebHost\WebHost.Core\WebHost.Core.csproj" />
+    <ProjectReference Include="..\Module\Admin\Web\Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="config\cache.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="config\db.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="config\host.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="config\jwt.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="config\logging.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="config\module.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

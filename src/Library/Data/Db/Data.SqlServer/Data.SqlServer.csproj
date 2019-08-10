@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>YunHu.Lib.Data.SqlServer</RootNamespace>
+    <AssemblyName>YunHu.Lib.Data.SqlServer</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Data.Core\Data.Core.csproj" />
+  </ItemGroup>
+
+</Project>

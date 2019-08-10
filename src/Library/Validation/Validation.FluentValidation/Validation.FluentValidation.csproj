@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>YunHu.Lib.Validation.FluentValidation</RootNamespace>
+    <AssemblyName>YunHu.Lib.Validation.FluentValidation</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Module\Module.Abstractions\Module.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Utils\Utils.Core\Utils.Core.csproj" />
+    <ProjectReference Include="..\Validation.Abstractions\Validation.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

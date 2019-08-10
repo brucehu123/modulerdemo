@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <!--<RootNamespace>YunHu.Module.Admin.Web</RootNamespace>
+    <AssemblyName>YunHu.Module.Admin.Web</AssemblyName>-->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Library\Module\Module.Abstractions\Module.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\Library\Utils\Utils.Mvc\Utils.Mvc.csproj" />
+    <ProjectReference Include="..\Library\Application\Application.csproj" />
+    <ProjectReference Include="..\Library\Infrastructure\Infrastructure.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\..\..\..\build\web.build.targets" />
+
+</Project>

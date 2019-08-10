@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>YunHu.Lib.WebHost.Electron</RootNamespace>
+    <AssemblyName>YunHu.Lib.WebHost.Electron</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ElectronNET.API" Version="5.22.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebHost.Core\WebHost.Core.csproj" />
+  </ItemGroup>
+
+</Project>

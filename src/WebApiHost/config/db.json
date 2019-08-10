@@ -1,0 +1,29 @@
+{
+  "Logging": true,
+  "Connections": [
+    {
+      "Name": "Admin",
+      "Dialect": 0,
+      "Database": "Nm_Admin",
+      "ConnString": "Server=.;Initial Catalog=nm_admin;User ID= sa;Password=123456;"
+    },
+    {
+      "Name": "CodeGenerator",
+      "Dialect": 0,
+      "Database": "Nm_CodeGenerator",
+      "ConnString": "Server=.;Initial Catalog=nm_codegenerator;User ID= sa;Password=123456;"
+    },
+    {
+      "Name": "Common",
+      "Dialect": 0,
+      "Database": "Nm_Common",
+      "ConnString": "Server=.;Initial Catalog=nm_common;User ID= sa;Password=123456;Server=localhost;"
+    },
+    {
+      "Name": "PersonnelFiles",
+      "Dialect": 0,
+      "Database": "Nm_PersonnelFiles",
+      "ConnString": "Server=.;Initial Catalog=nm_personnelfiles;User ID= sa;Password=123456;Server=localhost;"
+    }
+  ]
+}

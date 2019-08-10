@@ -1,0 +1,27 @@
+﻿<Project>
+  <PropertyGroup>
+    <Id>Admin</Id>
+    <Name>权限管理</Name>
+    <Authors>YunHu</Authors>
+    <Version>1.0.7</Version>
+    <Description>$(Name) - $(MSBuildProjectName)</Description>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <LangVersion>latest</LangVersion>
+    <!--设置打包路径-->
+    <PackageOutputPath>$(SolutionDir)\_packages</PackageOutputPath>
+    <!--取消生成目录附加目标框架目录-->
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Company></Company>
+    <Copyright></Copyright>
+    <RootNamespacePrefix>YunHu.Module.$(Id)</RootNamespacePrefix>
+    <AssemblyName>$(RootNamespacePrefix).$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>$(AssemblyName)</RootNamespace>
+  </PropertyGroup>
+  
+  <!--引入上层Directory.Build.props，相同属性被覆盖 -->
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+  <!--<Import Project="..\..\..\build\web.build.targets" />-->
+</Project>

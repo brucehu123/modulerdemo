@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>YunHu.Lib.Data.GenericHost</RootNamespace>
+    <AssemblyName>YunHu.Lib.Data.GenericHost</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Module\Module.Abstractions\Module.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\Utils\Utils.Core\Utils.Core.csproj" />
+    <ProjectReference Include="..\..\Core\Data.Abstractions\Data.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Core\Data.Core\Data.Core.csproj" />
+  </ItemGroup>
+
+</Project>

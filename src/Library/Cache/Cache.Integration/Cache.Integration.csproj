@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>YunHu.Lib.Cache.Integration</RootNamespace>
+    <AssemblyName>YunHu.Lib.Cache.Integration</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Utils\Utils.Core\Utils.Core.csproj" />
+    <ProjectReference Include="..\Cache.Abstractions\Cache.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

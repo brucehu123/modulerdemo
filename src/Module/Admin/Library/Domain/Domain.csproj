@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>YunHu.Module.Admin.Domain</RootNamespace>
+    <AssemblyName>YunHu.Module.Admin.Domain</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Library\Data\Core\Data.Abstractions\Data.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\..\Library\Data\Core\Data.Core\Data.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\Library\Data\Extend\Data.Query\Data.Query.csproj" />
+    <ProjectReference Include="..\..\..\..\Library\Utils\Utils.Core\Utils.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>YunHu.Module.Admin.Infrastructure</RootNamespace>
+    <AssemblyName>YunHu.Module.Admin.Infrastructure</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Library\Data\Core\Data.Core\Data.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\Library\Utils\Utils.Core\Utils.Core.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+</Project>
