@@ -4,10 +4,8 @@ using System.Threading.Tasks;
 using YunHu.Lib.Data.Abstractions;
 using YunHu.Lib.Module.Abstractions;
 using YunHu.Lib.Utils.Core.Result;
-using YunHu.Module.Admin.Domain.Menu;
 using YunHu.Module.Admin.Domain.ModuleInfo;
 using YunHu.Module.Admin.Domain.ModuleInfo.Models;
-using YunHu.Module.Admin.Domain.Permission;
 using YunHu.Module.Admin.Infrastructure.Repositories;
 using ModuleInfoEntity = YunHu.Module.Admin.Domain.ModuleInfo.ModuleInfoEntity;
 
@@ -16,16 +14,14 @@ namespace YunHu.Module.Admin.Application.ModuleInfoService
     public class ModuleInfoService : IModuleInfoService
     {
         private readonly IModuleInfoRepository _repository;
-        private readonly IPermissionRepository _permissionRepository;
-        private readonly IMenuRepository _menuRepository;
+     
         private readonly IUnitOfWork _uow;
         private readonly IModuleCollection _moduleCollection;
 
-        public ModuleInfoService(IModuleInfoRepository repository, IPermissionRepository permissionRepository, IMenuRepository menuRepository, IUnitOfWork<AdminDbContext> uow, IModuleCollection moduleCollection)
+        public ModuleInfoService(IModuleInfoRepository repository, IUnitOfWork<AdminDbContext> uow, IModuleCollection moduleCollection)
         {
             _repository = repository;
-            _permissionRepository = permissionRepository;
-            _menuRepository = menuRepository;
+          
             _uow = uow;
             _moduleCollection = moduleCollection;
         }
@@ -82,13 +78,7 @@ namespace YunHu.Module.Admin.Application.ModuleInfoService
             if (entity == null)
                 return ResultModel.NotExists;
 
-            var exists = await _permissionRepository.ExistsWidthModule(entity.Code);
-            if (exists)
-                return ResultModel.Failed("有权限绑定了该模块，请先删除绑定关系");
-
-            exists = await _menuRepository.ExistsWidthModule(entity.Code);
-            if (exists)
-                return ResultModel.Failed("有菜单绑定了该模块，请先删除绑定关系");
+          
 
             var result = await _repository.DeleteAsync(id);
             return ResultModel.Result(result);

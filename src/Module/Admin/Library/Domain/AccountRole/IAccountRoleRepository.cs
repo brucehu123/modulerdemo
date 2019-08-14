@@ -33,11 +33,11 @@ namespace YunHu.Module.Admin.Domain.AccountRole
         /// <returns></returns>
         Task<bool> Exists(Guid accountId, Guid roleId);
 
-        /// <summary>
-        /// 查询指定账户关联的角色列表
-        /// </summary>
-        /// <returns></returns>
-        Task<IList<Role.RoleEntity>> QueryRole(Guid accountId);
+        ///// <summary>
+        ///// 查询指定账户关联的角色列表
+        ///// </summary>
+        ///// <returns></returns>
+        //Task<IList<Role.RoleEntity>> QueryRole(Guid accountId);
 
         /// <summary>
         /// 查询指定角色的关联列表

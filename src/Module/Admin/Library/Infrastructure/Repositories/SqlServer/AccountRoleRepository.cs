@@ -5,9 +5,6 @@ using YunHu.Lib.Data.Abstractions;
 using YunHu.Lib.Data.Core;
 using YunHu.Module.Admin.Domain.Account;
 using YunHu.Module.Admin.Domain.AccountRole;
-using YunHu.Module.Admin.Domain.Role;
-using YunHu.Module.Admin.Domain.RoleMenu;
-using YunHu.Module.Admin.Domain.RoleMenuButton;
 
 namespace YunHu.Module.Admin.Infrastructure.Repositories.SqlServer
 {
@@ -32,37 +29,28 @@ namespace YunHu.Module.Admin.Infrastructure.Repositories.SqlServer
             return Db.Find(m => m.AccountId == accountId && m.RoleId == roleId).ExistsAsync();
         }
 
-        public Task<IList<RoleEntity>> QueryRole(Guid accountId)
-        {
-            return Db.Find(m => m.AccountId == accountId)
-                .InnerJoin<RoleEntity>((x, y) => x.RoleId == y.Id)
-                .Select((x, y) => new { y })
-                .ToListAsync<RoleEntity>();
-        }
+       
 
         public Task<IList<AccountRoleEntity>> QueryByRole(Guid roleId)
         {
             return Db.Find(m => m.RoleId == roleId).ToListAsync();
         }
 
-        public Task<IList<AccountRoleEntity>> QueryByMenu(Guid menuId)
-        {
-            return Db.Find()
-                .InnerJoin<RoleMenuEntity>((x, y) => x.RoleId == y.RoleId)
-                .Where((x, y) => y.MenuId == menuId)
-                .ToListAsync();
-        }
-
-        public Task<IList<AccountRoleEntity>> QueryByButton(Guid buttonId)
-        {
-            return Db.Find()
-                .InnerJoin<RoleMenuButtonEntity>((x, y) => x.RoleId == y.RoleId && y.ButtonId == buttonId)
-                .ToListAsync();
-        }
+     
 
         public Task<bool> ExistsByRole(Guid roleId)
         {
             return Db.Find(m => m.RoleId == roleId).InnerJoin<AccountEntity>((x, y) => x.AccountId == y.Id && y.Deleted == false).ExistsAsync();
+        }
+
+        public Task<IList<AccountRoleEntity>> QueryByMenu(Guid menuId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<AccountRoleEntity>> QueryByButton(Guid buttonId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

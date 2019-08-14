@@ -78,12 +78,12 @@ namespace YunHu.Module.Admin.Web.Controllers
             return _service.UpdatePassword(model);
         }
 
-        [HttpPost]
-        [Description("绑定角色")]
-        public Task<IResultModel> BindRole(AccountRoleBindModel model)
-        {
-            return _service.BindRole(model);
-        }
+        //[HttpPost]
+        //[Description("绑定角色")]
+        //public Task<IResultModel> BindRole(AccountRoleBindModel model)
+        //{
+        //    return _service.BindRole(model);
+        //}
 
         [HttpGet]
         [Description("查询")]

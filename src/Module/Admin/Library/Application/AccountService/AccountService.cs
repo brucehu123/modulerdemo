@@ -17,10 +17,7 @@ using YunHu.Module.Admin.Application.SystemService;
 using YunHu.Module.Admin.Domain.Account;
 using YunHu.Module.Admin.Domain.Account.Models;
 using YunHu.Module.Admin.Domain.AccountRole;
-using YunHu.Module.Admin.Domain.Button;
-using YunHu.Module.Admin.Domain.Menu;
-using YunHu.Module.Admin.Domain.Permission;
-using YunHu.Module.Admin.Domain.Role;
+
 using YunHu.Module.Admin.Infrastructure.Repositories;
 
 namespace YunHu.Module.Admin.Application.AccountService
@@ -44,26 +41,20 @@ namespace YunHu.Module.Admin.Application.AccountService
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _uow;
         private readonly IAccountRepository _accountRepository;
-        private readonly IAccountRoleRepository _accountRoleRepository;
-        private readonly IMenuRepository _menuRepository;
-        private readonly IRoleRepository _roleRepository;
-        private readonly IButtonRepository _buttonRepository;
-        private readonly IPermissionRepository _permissionRepository;
+
+      
         private readonly DrawingHelper _drawingHelper;
         private readonly ISystemService _systemService;
 
-        public AccountService(LoginInfo loginInfo, ICacheHandler cache, IMapper mapper, IUnitOfWork<AdminDbContext> uow, IAccountRepository accountRepository, IAccountRoleRepository accountRoleRepository, IMenuRepository menuRepository, IRoleRepository roleRepository, IButtonRepository buttonRepository, IPermissionRepository permissionRepository, DrawingHelper drawingHelper, ILogger<AccountService> logger, ISystemService systemService)
+        public AccountService(LoginInfo loginInfo, ICacheHandler cache, IMapper mapper, IUnitOfWork<AdminDbContext> uow, IAccountRepository accountRepository, IAccountRoleRepository accountRoleRepository, DrawingHelper drawingHelper, ILogger<AccountService> logger, ISystemService systemService)
         {
             _loginInfo = loginInfo;
             _cache = cache;
             _mapper = mapper;
             _uow = uow;
             _accountRepository = accountRepository;
-            _accountRoleRepository = accountRoleRepository;
-            _menuRepository = menuRepository;
-            _roleRepository = roleRepository;
-            _buttonRepository = buttonRepository;
-            _permissionRepository = permissionRepository;
+
+           
             _drawingHelper = drawingHelper;
             _systemService = systemService;
         }
@@ -142,11 +133,7 @@ namespace YunHu.Module.Admin.Application.AccountService
                 }
             };
 
-            var getMenuTree = GetAccountMenuTree();
-            var getButtonCodeList = _buttonRepository.QueryCodeByAccount(_loginInfo.AccountId);
 
-            model.Menus = await getMenuTree;
-            model.Buttons = await getButtonCodeList;
 
             return ResultModel.Success(model);
         }
@@ -194,35 +181,7 @@ namespace YunHu.Module.Admin.Application.AccountService
             return ResultModel.Result(result);
         }
 
-        public async Task<IResultModel> BindRole(AccountRoleBindModel model)
-        {
-            var exists = await _accountRepository.ExistsAsync(model.AccountId);
-            if (!exists)
-                return ResultModel.Failed("账户不存在");
 
-            exists = await _roleRepository.ExistsAsync(model.RoleId);
-            if (!exists)
-                return ResultModel.Failed("角色不存在");
-
-            //添加
-            if (model.Checked)
-            {
-                exists = await _accountRoleRepository.Exists(model.AccountId, model.RoleId);
-                if (!exists)
-                {
-                    var result = await _accountRoleRepository.AddAsync(new AccountRoleEntity { AccountId = model.AccountId, RoleId = model.RoleId });
-                    return ResultModel.Result(result);
-                }
-
-                return ResultModel.Success();
-
-            }
-            {
-                //删除
-                var result = await _accountRoleRepository.Delete(model.AccountId, model.RoleId);
-                return ResultModel.Result(result);
-            }
-        }
 
         public async Task<IResultModel> Query(AccountQueryModel model)
         {
@@ -232,11 +191,11 @@ namespace YunHu.Module.Admin.Application.AccountService
                 Total = model.TotalCount
             };
 
-            foreach (var item in result.Rows)
-            {
-                var roles = await _accountRoleRepository.QueryRole(item.Id);
-                item.Roles = roles.Select(r => new OptionResultModel { Label = r.Name, Value = r.Id }).ToList();
-            }
+            //foreach (var item in result.Rows)
+            //{
+            //    var roles = await _accountRoleRepository.QueryRole(item.Id);
+            //    item.Roles = roles.Select(r => new OptionResultModel { Label = r.Name, Value = r.Id }).ToList();
+            //}
 
             return ResultModel.Success(result);
         }
@@ -263,20 +222,10 @@ namespace YunHu.Module.Admin.Application.AccountService
             _uow.BeginTransaction();
             if (await _accountRepository.AddAsync(account))
             {
-                if (model.Roles != null && model.Roles.Any())
-                {
-                    var accountRoleList = model.Roles.Select(m => new AccountRoleEntity { AccountId = account.Id, RoleId = m }).ToList();
-                    if (await _accountRoleRepository.AddAsync(accountRoleList))
-                    {
-                        _uow.Commit();
-                        return result.Success(account.Id);
-                    }
-                }
-                else
-                {
-                    _uow.Commit();
-                    return result.Success(account.Id);
-                }
+
+                _uow.Commit();
+                return result.Success(account.Id);
+
             }
 
             return result.Failed();
@@ -289,8 +238,8 @@ namespace YunHu.Module.Admin.Application.AccountService
                 return ResultModel.Failed("账户不存在");
 
             var model = _mapper.Map<AccountUpdateModel>(entity);
-            var roles = await _accountRoleRepository.QueryRole(id);
-            model.Roles = roles.Select(m => m.Id).ToList();
+            //var roles = await _accountRoleRepository.QueryRole(id);
+            //model.Roles = roles.Select(m => m.Id).ToList();
             return ResultModel.Success(model);
         }
 
@@ -308,33 +257,13 @@ namespace YunHu.Module.Admin.Application.AccountService
 
             _uow.BeginTransaction();
             var result = await _accountRepository.UpdateAsync(account);
-            if (result)
-            {
-                result = await _accountRoleRepository.DeleteByAccount(account.Id);
-                if (result)
-                {
-                    if (model.Roles != null && model.Roles.Any())
-                    {
-                        var accountRoleList = model.Roles.Select(m => new AccountRoleEntity { AccountId = account.Id, RoleId = m }).ToList();
-                        if (await _accountRoleRepository.AddAsync(accountRoleList))
-                        {
-                            _uow.Commit();
-                            ClearPermissionListCache(account.Id);
 
-                            return ResultModel.Success();
-                        }
-                    }
-                    else
-                    {
-                        _uow.Commit();
-                        ClearPermissionListCache(account.Id);
+            _uow.Commit();
+            ClearPermissionListCache(account.Id);
 
-                        return ResultModel.Success();
-                    }
-                }
-            }
+            return ResultModel.Success();
 
-            return ResultModel.Failed();
+           
         }
 
         public async Task<IResultModel> Delete(Guid id)
@@ -361,22 +290,7 @@ namespace YunHu.Module.Admin.Application.AccountService
             return ResultModel.Result(result);
         }
 
-        public async Task<List<PermissionEntity>> QueryPermissionList(Guid id)
-        {
-            var entity = await _accountRepository.GetAsync(id);
-            if (entity == null)
-                return new List<PermissionEntity>();
-
-            var key = AccountPermissionListKey + id;
-            //TODO:清除账户权限的缓存
-            if (!_cache.TryGetValue(key, out List<PermissionEntity> list))
-            {
-                list = (await _permissionRepository.QueryByAccount(id)).ToList();
-                await _cache.SetAsync(key, list);
-            }
-
-            return list;
-        }
+        
 
         public void ClearPermissionListCache(Guid id)
         {
@@ -385,38 +299,9 @@ namespace YunHu.Module.Admin.Application.AccountService
 
         #region ==获取账户的菜单树==
 
-        /// <summary>
-        /// 获取账户的菜单树
-        /// </summary>
-        /// <returns></returns>
-        private async Task<List<AccountMenuItem>> GetAccountMenuTree()
-        {
-            var entities = (await _menuRepository.GetByAccount(_loginInfo.AccountId)).Distinct(new MenuComparer()).ToList();
-            var all = _mapper.Map<List<AccountMenuItem>>(entities);
-            var tree = all.Where(e => e.ParentId.IsEmpty()).OrderBy(e => e.Sort).ToList();
+     
 
-            tree.ForEach(menu =>
-            {
-                if (menu.Type == MenuType.Node)
-                    SetChildren(menu, all);
-            });
-
-            return tree;
-        }
-
-        private void SetChildren(AccountMenuItem parent, List<AccountMenuItem> all)
-        {
-            parent.Children = all.Where(e => e.ParentId == parent.Id).OrderBy(e => e.Sort).ToList();
-
-            if (parent.Children.Any())
-            {
-                parent.Children.ForEach(menu =>
-                {
-                    if (menu.Type == MenuType.Node)
-                        SetChildren(menu, all);
-                });
-            }
-        }
+       
 
         #endregion
 
@@ -449,22 +334,5 @@ namespace YunHu.Module.Admin.Application.AccountService
         }
     }
 
-    /// <summary>
-    /// 菜单比较器
-    /// </summary>
-    public class MenuComparer : IEqualityComparer<MenuEntity>
-    {
-        public bool Equals(MenuEntity x, MenuEntity y)
-        {
-            if (x == null || y == null)
-                return false;
-
-            return x.Id == y.Id;
-        }
-
-        public int GetHashCode(MenuEntity obj)
-        {
-            return 1;
-        }
-    }
+   
 }

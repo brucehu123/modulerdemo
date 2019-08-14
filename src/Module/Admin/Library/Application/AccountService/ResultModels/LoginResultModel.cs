@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using YunHu.Module.Admin.Domain.Menu;
 
 namespace YunHu.Module.Admin.Application.AccountService.ResultModels
 {
@@ -76,10 +75,7 @@ namespace YunHu.Module.Admin.Application.AccountService.ResultModels
         /// </summary>
         public Guid ParentId { get; set; }
 
-        /// <summary>
-        /// 类型
-        /// </summary>
-        public MenuType Type { get; set; }
+       
 
         /// <summary>
         /// 模块编码
@@ -121,10 +117,7 @@ namespace YunHu.Module.Admin.Application.AccountService.ResultModels
         /// </summary>
         public string Url { get; set; }
 
-        /// <summary>
-        /// 链接菜单打开方式
-        /// </summary>
-        public MenuTarget Target { get; set; }
+       
 
         /// <summary>
         /// 对话框宽度

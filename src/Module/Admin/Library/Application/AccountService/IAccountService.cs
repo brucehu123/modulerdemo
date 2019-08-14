@@ -5,7 +5,6 @@ using YunHu.Lib.Utils.Core.Result;
 using YunHu.Module.Admin.Application.AccountService.ViewModels;
 using YunHu.Module.Admin.Domain.Account;
 using YunHu.Module.Admin.Domain.Account.Models;
-using YunHu.Module.Admin.Domain.Permission;
 
 namespace YunHu.Module.Admin.Application.AccountService
 {
@@ -41,11 +40,7 @@ namespace YunHu.Module.Admin.Application.AccountService
         /// <returns></returns>
         Task<IResultModel> UpdatePassword(UpdatePasswordModel model);
 
-        /// <summary>
-        /// 绑定角色
-        /// </summary>
-        /// <returns></returns>
-        Task<IResultModel> BindRole(AccountRoleBindModel model);
+       
 
         /// <summary>
         /// 查询列表
@@ -89,11 +84,7 @@ namespace YunHu.Module.Admin.Application.AccountService
         /// <returns></returns>
         Task<IResultModel> ResetPassword(Guid id);
 
-        /// <summary>
-        /// 查询指定账户的权限列表
-        /// </summary>
-        /// <returns></returns>
-        Task<List<PermissionEntity>> QueryPermissionList(Guid id);
+       
 
         /// <summary>
         /// 清除指定账户的缓存数据

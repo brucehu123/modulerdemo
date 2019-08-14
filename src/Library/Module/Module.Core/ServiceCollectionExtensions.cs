@@ -25,9 +25,10 @@ namespace YunHu.Lib.Module.Core
             var cfgHelper = new ConfigurationHelper();
             var cfg = cfgHelper.Load("module", environmentName, true);
 
-            //通用配置
+            // 通用配置。
             services.Configure<ModuleCommonOptions>(cfg);
-
+            
+            // 遍历模块。
             foreach (var module in modules)
             {
                 if (module == null)

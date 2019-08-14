@@ -7,12 +7,11 @@ using YunHu.Lib.Data.Abstractions;
 using YunHu.Lib.Utils.Core.Extensions;
 using YunHu.Lib.Utils.Core.Result;
 using YunHu.Module.Admin.Application.ModuleInfoService;
-using YunHu.Module.Admin.Application.PermissionService;
 using YunHu.Module.Admin.Application.SystemService.ViewModels;
 using YunHu.Module.Admin.Domain.Account;
 using YunHu.Module.Admin.Domain.AccountRole;
 using YunHu.Module.Admin.Domain.Config;
-using YunHu.Module.Admin.Domain.Role;
+//using YunHu.Module.Admin.Domain.Role;
 using YunHu.Module.Admin.Infrastructure.Repositories;
 
 namespace YunHu.Module.Admin.Application.SystemService
@@ -29,19 +28,17 @@ namespace YunHu.Module.Admin.Application.SystemService
         private readonly IUnitOfWork _uow;
         private readonly IConfigRepository _configRepository;
         private readonly IModuleInfoService _moduleInfoService;
-        private readonly IPermissionService _permissionService;
         private readonly IAccountRepository _accountRepository;
-        private readonly IRoleRepository _roleRepository;
+        //private readonly IRoleRepository _roleRepository;
         private readonly IAccountRoleRepository _accountRoleRepository;
         private readonly ICacheHandler _cache;
 
-        public SystemService(IUnitOfWork<AdminDbContext> uow, IConfigRepository configRepository, IModuleInfoService moduleInfoService, IPermissionService permissionService, IRoleRepository roleRepository, ICacheHandler cache, IAccountRepository accountRepository, IAccountRoleRepository accountRoleRepository)
+        public SystemService(IUnitOfWork<AdminDbContext> uow, IConfigRepository configRepository, IModuleInfoService moduleInfoService, ICacheHandler cache, IAccountRepository accountRepository, IAccountRoleRepository accountRoleRepository)
         {
             _uow = uow;
             _configRepository = configRepository;
             _moduleInfoService = moduleInfoService;
-            _permissionService = permissionService;
-            _roleRepository = roleRepository;
+            //_roleRepository = roleRepository;
             _cache = cache;
             _accountRepository = accountRepository;
             _accountRoleRepository = accountRoleRepository;
@@ -203,38 +200,38 @@ namespace YunHu.Module.Admin.Application.SystemService
 
         public async Task<IResultModel> Install(SystemInstallModel model)
         {
-            await _moduleInfoService.Sync();
-            await _permissionService.Sync(model.Permissions);
+            //await _moduleInfoService.Sync();
+            //await _permissionService.Sync(model.Permissions);
 
-            var role = new RoleEntity
-            {
-                Name = "系统管理员"
-            };
+            //var role = new RoleEntity
+            //{
+            //    Name = "系统管理员"
+            //};
 
-            await _roleRepository.AddAsync(role);
+            //await _roleRepository.AddAsync(role);
 
-            var account = new AccountEntity
-            {
-                UserName = "tdkj",
-                Password = "FDFAEC6B4F80E739A50ADC802C5B537C",
-                Name = "管理员"
-            };
-            await _accountRepository.AddAsync(account);
+            //var account = new AccountEntity
+            //{
+            //    UserName = "tdkj",
+            //    Password = "FDFAEC6B4F80E739A50ADC802C5B537C",
+            //    Name = "管理员"
+            //};
+            //await _accountRepository.AddAsync(account);
 
-            await _accountRoleRepository.AddAsync(new AccountRoleEntity { AccountId = account.Id, RoleId = role.Id });
+            //await _accountRoleRepository.AddAsync(new AccountRoleEntity { AccountId = account.Id, RoleId = role.Id });
 
-            UpdateConfig(new SystemConfigModel
-            {
-                Title = "腾迪权限管理系统",
-                Auditing = false,
-                Toolbar = new SystemToolbar
-                {
-                    Fullscreen = true,
-                    Skin = true,
-                    Logout = true,
-                    UserInfo = true
-                }
-            });
+            //UpdateConfig(new SystemConfigModel
+            //{
+            //    Title = "云呼权限管理系统",
+            //    Auditing = false,
+            //    Toolbar = new SystemToolbar
+            //    {
+            //        Fullscreen = true,
+            //        Skin = true,
+            //        Logout = true,
+            //        UserInfo = true
+            //    }
+            //});
 
             return ResultModel.Success();
         }

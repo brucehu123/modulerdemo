@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 using YunHu.Lib.Auth.Abstractions;
 using YunHu.Lib.Utils.Core.Extensions;
 using YunHu.Module.Admin.Application.AccountService;
-using YunHu.Module.Admin.Domain.Permission;
 using YunHu.Module.Admin.Infrastructure.Options;
 
 namespace YunHu.Module.Admin.Web.Core
@@ -30,15 +29,16 @@ namespace YunHu.Module.Admin.Web.Core
         {
             if (!_options.PermissionValidate)
                 return true;
+            return true;
 
-            var permissions = _accountService.QueryPermissionList(_loginInfo.AccountId).Result;
+            //var permissions = _accountService.QueryPermissionList(_loginInfo.AccountId).Result;
 
-            var routeValues = context.ActionDescriptor.RouteValues;
-            var area = routeValues["area"];
-            var controller = routeValues["controller"];
-            var action = routeValues["action"];
-            var httpMethod = (HttpMethodType)Enum.Parse(typeof(HttpMethodType), context.HttpContext.Request.Method);
-            return permissions.Any(m => m.ModuleCode.EqualsIgnoreCase(area) && m.Controller.EqualsIgnoreCase(controller) && m.Action.EqualsIgnoreCase(action) && m.HttpMethod == httpMethod);
+            //var routeValues = context.ActionDescriptor.RouteValues;
+            //var area = routeValues["area"];
+            //var controller = routeValues["controller"];
+            //var action = routeValues["action"];
+            //var httpMethod = (HttpMethodType)Enum.Parse(typeof(HttpMethodType), context.HttpContext.Request.Method);
+            //return permissions.Any(m => m.ModuleCode.EqualsIgnoreCase(area) && m.Controller.EqualsIgnoreCase(controller) && m.Action.EqualsIgnoreCase(action) && m.HttpMethod == httpMethod);
         }
     }
 }

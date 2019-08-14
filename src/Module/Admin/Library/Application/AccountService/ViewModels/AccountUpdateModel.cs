@@ -31,10 +31,6 @@ namespace YunHu.Module.Admin.Application.AccountService.ViewModels
         /// </summary>
         public string Email { get; set; }
 
-        /// <summary>
-        /// 绑定角色列表
-        /// </summary>
-        [Required(ErrorMessage = "请选择角色")]
-        public IList<Guid> Roles { get; set; }
+  
     }
 }
