@@ -37,16 +37,15 @@ namespace YunHu.Lib.WebHost.Core
 
             //加载模块
             var modules = services.AddModules(env.EnvironmentName);
+
             System.Collections.Generic.List<System.Reflection.Assembly> assemblies = new System.Collections.Generic.List<System.Reflection.Assembly>();
+            Module.Abstractions.ModuleInfo partModule = null;
 
             #region 添加未引用的模块
 
             var path = @"E:\Code\Net\Moduler\src\WebApiHost\bin\Debug\netcoreapp2.2\plugins";
 
             System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(path);
-           
-
-            Module.Abstractions.ModuleInfo partModule = null;
 
             foreach (var file in dir.GetFiles())
             {
@@ -138,12 +137,13 @@ namespace YunHu.Lib.WebHost.Core
               .AddValidators(services)//添加验证器
               .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            // 添加未引用的模块
             if (assemblies.Count > 0)
             {
                 var assembly = assemblies.Where(s => s.FullName.Contains("Module." + partModule.Id + ".Web")).FirstOrDefault();
                 mvcBuilder.AddApplicationPart(assembly);
             }
-           
+
 
             //添加数据库
             services.AddDb(env.EnvironmentName, modules);
