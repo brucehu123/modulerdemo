@@ -77,17 +77,17 @@ namespace YunHu.Module.Admin.Application.AccountService
         {
             var result = new ResultModel<AccountEntity>();
 
-            var verifyCodeKey = VerifyCodeKey + model.PictureId;
-            var systemConfig = (await _systemService.GetConfig()).Data;
-            if (systemConfig.LoginVerifyCode)
-            {
-                if (model.Code.IsNull())
-                    return result.Failed("请输入验证码");
+            //var verifyCodeKey = VerifyCodeKey + model.PictureId;
+            //var systemConfig = (await _systemService.GetConfig()).Data;
+            //if (systemConfig.LoginVerifyCode)
+            //{
+            //    if (model.Code.IsNull())
+            //        return result.Failed("请输入验证码");
 
-                var code = await _cache.GetAsync(verifyCodeKey);
-                if (model.PictureId.IsNull() || !model.Code.Equals(code))
-                    return result.Failed("验证码有误");
-            }
+            //    var code = await _cache.GetAsync(verifyCodeKey);
+            //    if (model.PictureId.IsNull() || !model.Code.Equals(code))
+            //        return result.Failed("验证码有误");
+            //}
 
             var account = await _accountRepository.GetByUserName(model.UserName);
             if (!CheckAccount(account, out string msg))
@@ -107,8 +107,8 @@ namespace YunHu.Module.Admin.Application.AccountService
 
             #endregion
 
-            //删除验证码缓存
-            await _cache.RemoveAsync(verifyCodeKey);
+            ////删除验证码缓存
+            //await _cache.RemoveAsync(verifyCodeKey);
 
             return result.Success(account);
         }

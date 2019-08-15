@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using YunHu.Lib.Data.Abstractions;
 using YunHu.Lib.Data.Core;
+using YunHu.Lib.Data.Query;
+using YunHu.Lib.Utils.Core.Extensions;
+using YunHu.Module.Admin.Domain.Account;
 using YunHu.Module.Role.Domain.Role;
 using YunHu.Module.Role.Domain.Role.Models;
 
@@ -25,14 +27,13 @@ namespace YunHu.Module.Role.Infrastructure.Repositories.SqlServer
 
         public async Task<IList<RoleEntity>> Query(RoleQueryModel model)
         {
-            //var paging = model.Paging();
-            //var query = Db.Find(m => m.Deleted == false).LeftJoin<AccountEntity>((x, y) => x.CreatedBy == y.Id);
-            //query.WhereIf(model.Name.NotNull(), (x, y) => x.Name.Contains(model.Name));
-            //query.Select((x, y) => new { x, Creator = y.Name });
-            //var list = await query.PaginationAsync(paging);
-            //model.TotalCount = paging.TotalCount;
-            //return list;
-            return null;
+            var paging = model.Paging();
+            var query = Db.Find(m => m.Deleted == false).LeftJoin<AccountEntity>((x, y) => x.CreatedBy == y.Id);
+            query.WhereIf(model.Name.NotNull(), (x, y) => x.Name.Contains(model.Name));
+            query.Select((x, y) => new { x, Creator = y.Name });
+            var list = await query.PaginationAsync(paging);
+            model.TotalCount = paging.TotalCount;
+            return list;
         }
 
         public override Task<IList<RoleEntity>> GetAllAsync()

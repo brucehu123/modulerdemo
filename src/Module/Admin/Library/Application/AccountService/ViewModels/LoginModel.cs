@@ -25,14 +25,14 @@ namespace YunHu.Module.Admin.Application.AccountService.ViewModels
         /// </summary>
         public Platform Platform { get; set; }
 
-        /// <summary>
-        /// 验证码图片编号
-        /// </summary>
-        public string PictureId { get; set; }
+        ///// <summary>
+        ///// 验证码图片编号
+        ///// </summary>
+        //public string PictureId { get; set; }
 
-        /// <summary>
-        /// 验证码
-        /// </summary>
-        public string Code { get; set; }
+        ///// <summary>
+        ///// 验证码
+        ///// </summary>
+        //public string Code { get; set; }
     }
 }

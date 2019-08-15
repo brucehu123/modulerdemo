@@ -26,7 +26,7 @@ namespace YunHu.Module.Role.Web.Controllers
         [Description("查询")]
         public async Task<IResultModel> Query([FromQuery]RoleQueryModel model)
         {
-            return await _service.Query(model);
+            return await _service.QueryAsync(model);
         }
 
         [HttpPost]

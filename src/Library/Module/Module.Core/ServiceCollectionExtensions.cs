@@ -52,7 +52,7 @@ namespace YunHu.Lib.Module.Core
         /// <summary>
         /// 添加应用服务
         /// </summary>
-        private static void AddApplicationServices(this IServiceCollection services, ModuleInfo module)
+        public static void AddApplicationServices(this IServiceCollection services, ModuleInfo module)
         {
             var types = module.AssembliesInfo.Application.GetTypes();
             var interfaces = types.Where(t => t.FullName != null && t.IsInterface && t.FullName.EndsWith("Service", StringComparison.OrdinalIgnoreCase));

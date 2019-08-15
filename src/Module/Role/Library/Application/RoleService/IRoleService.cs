@@ -15,7 +15,7 @@ namespace YunHu.Module.Role.Application.RoleService
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<IResultModel> Query(RoleQueryModel model);
+        Task<IResultModel> QueryAsync(RoleQueryModel model);
 
         /// <summary>
         /// 创建
