@@ -43,7 +43,7 @@ namespace YunHu.Lib.WebHost.Core
 
             #region 添加未引用的模块
 
-            var path = @"E:\Code\Net\Moduler\src\WebApiHost\bin\Debug\netcoreapp2.2\plugins";
+            var path = @"E:\plugins";
 
             System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(path);
 
